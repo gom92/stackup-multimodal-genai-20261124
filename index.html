@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryVoice — Type it. Hear it. See it.</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="hero">
+  <h1>🎙️ StoryVoice</h1>
+  <p class="tagline">Type it. Hear it. See it. — a tiny storyteller that writes, illustrates and narrates.</p>
+  <div class="badges" aria-label="Modalities">
+    <span class="badge badge-text">✍️ Text</span>
+    <span class="badge badge-image">🎨 Image</span>
+    <span class="badge badge-speech">🔊 Speech</span>
+  </div>
+  <div class="status" id="status-bar" aria-live="polite">
+    <span class="pill" id="pill-text">Text API: checking…</span>
+    <span class="pill" id="pill-image">Image API: checking…</span>
+    <span class="pill" id="pill-speech">Speech: checking…</span>
+  </div>
+</header>
+
+<main>
+  <section class="card" id="prompt-card">
+    <label for="prompt">What should the story be about?</label>
+    <textarea id="prompt" rows="3" maxlength="300"
+      placeholder="e.g. a brave little fox who finds a magic lantern in the forest"></textarea>
+    <div class="row">
+      <button id="btn-mic" type="button" title="Speak your prompt">🎤 Speak it</button>
+      <button id="btn-surprise" type="button" title="Pick a random prompt">✨ Surprise me</button>
+      <button id="btn-generate" type="button" class="primary">📖 Tell me a story</button>
+    </div>
+    <p class="hint" id="mic-hint"></p>
+    <p class="error" id="prompt-error" hidden></p>
+  </section>
+
+  <section class="card" id="story-card" hidden>
+    <div class="banner" id="sample-banner" hidden>
+      ⚠️ Pollinations text API was unreachable, so this is a built-in sample story.
+      Your prompt was not sent anywhere. Try again later for a live AI story.
+    </div>
+    <h2 id="story-title"></h2>
+    <div id="story-text" aria-live="polite"></div>
+    <figure id="figure">
+      <img id="illustration" alt="AI illustration for the story" hidden>
+      <div id="image-placeholder" class="image-placeholder" hidden>
+        🖼️ Illustration unavailable — the image API could not be reached.
+      </div>
+      <figcaption id="image-caption"></figcaption>
+    </figure>
+
+    <div class="narrate">
+      <h3>🔊 Narration</h3>
+      <div class="row">
+        <label class="voice-label" for="voice">Voice
+          <select id="voice"></select>
+        </label>
+        <label class="rate-label" for="rate">Speed
+          <input id="rate" type="range" min="0.6" max="1.4" step="0.1" value="1">
+          <span id="rate-value">1.0×</span>
+        </label>
+      </div>
+      <div class="row">
+        <button id="btn-read" type="button" class="primary">▶️ Read aloud</button>
+        <button id="btn-stop" type="button" disabled>⏹ Stop</button>
+      </div>
+      <p class="hint" id="narrate-status">Press “Read aloud” and the story will be spoken by your browser.</p>
+      <div class="progress" id="read-progress" hidden>
+        <div class="progress-bar" id="read-progress-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card how">
+    <h3>How it works — no keys, no accounts</h3>
+    <ol>
+      <li><strong>Text:</strong> your prompt goes to the free Pollinations text API, which writes a short story.</li>
+      <li><strong>Image:</strong> the same prompt goes to the free Pollinations image API, which draws the illustration.</li>
+      <li><strong>Speech:</strong> narration uses your browser's built-in speech synthesis — nothing leaves your device.</li>
+    </ol>
+    <p class="fineprint">Prompts are sent to Pollinations only when you press “Tell me a story”. No sign-ups, no API keys, no uploads, no tracking. Speech recognition (the 🎤 button) also runs in your browser via the Web Speech API, where supported.</p>
+  </section>
+</main>
+
+<footer>
+  <p>StoryVoice — built for the StackUp November Coding Challenge (Multimodal GenAI). MIT licensed.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
